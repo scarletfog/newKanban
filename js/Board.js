@@ -8,24 +8,27 @@ var board = {
 };
 
 $('.create-column')
-    .click(function() {
-        var columnName = prompt('Wpisz nazwę kolumny');
-        $.ajax({
-    		url: baseUrl + '/column',
-    		method: 'POST',
-    		data: {
-            	name: columnName
-    		},
-    		success: function(response){
-    			var column = new Column(response.id, columnName);
-    			board.createColumn(column);
-          	}
-        });
-});
-	
+	.click(function() {
+	  var columnName = prompt('Wpisz nazwę kolumny');
+
+		console.log('Chcę stworzyc kolumne ' + columnName);
+
+	  $.ajax({
+			url: baseUrl + '/column',
+			method: 'POST',
+			data: {
+	    	name: columnName
+			},
+			success: function(response) {
+				var column = new Column(response.id, columnName);
+				board.createColumn(column);
+	  	}
+	  });
+	});
+
 function initSortable() {
-    $('.card-list').sortable({
-      connectWith: '.card-list',
-      placeholder: 'card-placeholder'
-    }).disableSelection();
-  }
+  $('.card-list').sortable({
+    connectWith: '.card-list',
+    placeholder: 'card-placeholder'
+  }).disableSelection();
+}
