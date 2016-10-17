@@ -27,11 +27,10 @@ var card2 = new Card('stworzyc tablice kanban');*/
 doingColumn.createCard(card2);*/
 
 //API
-
 var baseUrl = 'https://kodilla.com/pl/bootcamp-api';
 var myHeaders = {
-  'X-Client-Id': 78;
-  'X-Auth-Token': 9a4698f08256806adcffb7ce834b2a0d;
+  'X-Client-Id': 78,
+  'X-Auth-Token': '9a4698f08256806adcffb7ce834b2a0d'
 };
 
 $.ajaxSetup({
@@ -39,24 +38,24 @@ $.ajaxSetup({
 });
 
 $.ajax({
-    url: baseUrl + '/board',
-    method: 'GET',
-    success: function(response) {
-      setupColumns(response.columns);
-    }
+  url: baseUrl + '/board',
+  method: 'GET',
+  success: function(response) {
+    setupColumns(response.columns);
+  }
 });
 
 function setupColumns(columns) {
-    columns.forEach(function (column) {
-  		var col = new Column(column.id, column.name);
-        board.createColumn(col);
-        setupCards(col, column.cards);
-    });
+  columns.forEach(function (column) {
+		var col = new Column(column.id, column.name);
+    board.createColumn(col);
+    setupCards(col, column.cards);
+  });
 }
 
 function setupCards(col, cards) {
 	cards.forEach(function (card) {
-        var card = new Card(card.id, card.name, card.bootcamp_kanban_column_id);
-    	col.createCard(card);
-  	})
+    var card = new Card(card.id, card.name, card.bootcamp_kanban_column_id);
+  	col.createCard(card);
+	});
 }
